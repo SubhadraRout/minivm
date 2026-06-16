@@ -37,7 +37,15 @@ fn main() {
         }
 
         "run" => {
-            println!("VM not implemented yet.");
+            if args.len() != 3 {
+                print_usage();
+                process::exit(1);
+            }
+
+            if let Err(e) = vm::Vm::run_file(&args[2]) {
+                eprintln!("{}", e);
+                process::exit(1);
+            }
         }
 
         "dis" => {
