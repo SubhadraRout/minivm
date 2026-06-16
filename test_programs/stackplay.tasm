@@ -1,0 +1,26 @@
+; stackplay.tasm
+; Compute a² + b²
+; a = 12
+; b = 35
+; Each input pushed exactly once.
+
+PUSH 12
+STORE 0
+
+PUSH 35
+STORE 1
+
+LOAD 0
+DUP
+SWAP
+MUL
+
+LOAD 1
+DUP
+SWAP
+MUL
+
+ADD
+
+PRINT
+HALT

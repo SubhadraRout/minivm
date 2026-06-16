@@ -1,0 +1,39 @@
+; Print digits of 9274
+; Expected:
+; 9
+; 2
+; 7
+; 4
+
+PUSH 9274
+STORE 0
+
+; thousands digit
+LOAD 0
+PUSH 1000
+DIV
+PRINT
+
+; hundreds digit
+LOAD 0
+PUSH 1000
+MOD
+PUSH 100
+DIV
+PRINT
+
+; tens digit
+LOAD 0
+PUSH 100
+MOD
+PUSH 10
+DIV
+PRINT
+
+; ones digit
+LOAD 0
+PUSH 10
+MOD
+PRINT
+
+HALT

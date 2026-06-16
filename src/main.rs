@@ -37,12 +37,16 @@ fn main() {
         }
 
         "run" => {
-            if args.len() != 3 {
+            let (trace, file) = if args.len() == 3 {
+                (false, &args[2])
+            } else if args.len() == 4 && args[2] == "--trace" {
+                (true, &args[3])
+            } else {
                 print_usage();
                 process::exit(1);
-            }
+            };
 
-            if let Err(e) = vm::Vm::run_file(&args[2]) {
+            if let Err(e) = vm::Vm::run_file(file, trace) {
                 eprintln!("{}", e);
                 process::exit(1);
             }
