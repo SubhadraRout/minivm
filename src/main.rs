@@ -12,7 +12,7 @@ fn print_usage() {
     eprintln!("Usage:");
     eprintln!("  minivm asm <input.tasm> -o <output.tbc>");
     eprintln!("  minivm run <input.tbc>");
-    eprintln!("  minivm dis <input.tbc>");
+    eprintln!("  minivm dis <input.tbc> -o <output.tasm>");
 }
 
 fn main() {
@@ -49,7 +49,15 @@ fn main() {
         }
 
         "dis" => {
-            println!("Disassembler not implemented yet.");
+            if args.len() != 5 || args[3] != "-o" {
+                print_usage();
+                process::exit(1);
+            }
+
+            if let Err(e) = disassembler::disassemble_file(&args[2], &args[4]) {
+                eprintln!("{}", e);
+                process::exit(1);
+            }
         }
 
         _ => {
